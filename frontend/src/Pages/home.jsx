@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useLocation } from "wouter";
+import { URL_API } from "../Config";
 
 export default function Home() {
 
@@ -9,7 +10,7 @@ export default function Home() {
   const setLocation = useLocation()[1]
 
   useEffect(() => {
-    fetch("http://localhost:3000/people")
+    fetch(`${URL_API}people`)
     .then(res => res.json())
     .then(setPeople)
   }, [setPeople])

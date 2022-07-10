@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useLocation } from "wouter";
 
+import { URL_API } from "../Config";
+
 const STATE_OPTIONS = {
     DISABLED : 0,
     ENABLED : 1
@@ -18,14 +20,14 @@ export default function Delete () {
     const isButtonDisabled = option === STATE_OPTIONS.DISABLED
 
     useEffect(() => {
-        fetch("http://localhost:3000/people")
+        fetch(`${URL_API}people`)
             .then(res => res.json())
             .then(setPeople)
     }, [setPeople])
 
     const handleSubmit = e => {
         e.preventDefault()
-        fetch(`http://localhost:3000/people/${id}`, {
+        fetch(`${URL_API}people/${id}`, {
             method: "DELETE"
         })
             .then(res => res.json())

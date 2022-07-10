@@ -6,6 +6,8 @@ WORKDIR /home/app
 
 COPY backend .
 
+RUN npm i
+
 EXPOSE 3000
 
 CMD ["npm", "start"]

@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useLocation } from "wouter";
 import Form from "../components/Form";
+import { URL_API } from "../Config";
 
 export default function Update ({ params }) {
     const [person, setPerson] = useState({
@@ -23,7 +24,7 @@ export default function Update ({ params }) {
         if(person.name === "") return alert("El nombre no puede estar vacio")
         if(person.age === "") return alert("La edad no puede estar vacia")
         
-        fetch(`http://localhost:3000/people/${params.id}`, {
+        fetch(`${URL_API}people/${params.id}`, {
             method: "PUT",
             headers: new Headers({
                 "Content-type" : "application/json"
