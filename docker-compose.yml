@@ -1,0 +1,40 @@
+version: "3.9"
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT_BACKEND=3000
+    links:
+      - database
+  database:
+    image: mongo
+    container_name: database
+    ports: 
+      - "27017:27017"
+    env_file: .env
+    volumes:
+      - ../database-prod:/data/db
+  express:
+    image: mongo-express
+    container_name: express
+    ports:
+      - "8081:8081"
+    restart: always
+    depends_on:
+      - database
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=database
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=root
+  frontend:
+    build:
+      context: .
+      dockerfile: nginx
+    container_name: frontend
+    ports:
+      - "8080:80"
